@@ -114,22 +114,6 @@ echo 'COMMIT' >> /etc/iptables/rules.v4
 iptables-restore < /etc/iptables/rules.v4
 echo '<<<Success>>>' 
 ##############################################
-echo '==========================================SSH Rules Output======================================================'
-more /etc/hosts.allow
-more /etc/hosts.deny
-echo '==========================================IPv6 Disable output==================================================='
-more /etc/default/grub
-echo '==========================================Ser2Net Service Restart==============================================='
-service ser2net restart
-echo '==========================================Ser2Net Service Status================================================'
-service ser2net status
-echo '==========================================SSH Service Status===================================================='
-service ssh status
-echo '==========================================Open TCP/UDP Ports===================================================='
-sudo ss -ltnp
-echo '==========================================IPTables Output======================================================='
-iptables -L
-echo '***************************************System hardening completed!**********************************************'
-sleep 15
-echo 'Waiting 15sec before rebooting....'
+echo 'Rebooting system...in 5sec...
+sleep 5
 reboot
