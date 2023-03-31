@@ -1,5 +1,8 @@
 #!/bin/bash
-
+##############################################################################################
+echo '===Adding Cron job for auto maitenance==='
+wget https://raw.githubusercontent.com/moislamm/linux-harden/main/upgrade.sh && chmod 700 upgrade.sh
+echo "$(crontab -l ; echo '30 20 * * * /root/upgrade.sh') | crontab -"
 ##############################################################################################
 echo '===Performing Update and Upgrade==='
 sudo apt-get update
@@ -114,10 +117,6 @@ echo '-A INPUT -j DROP' >> /etc/iptables/rules.v4
 echo 'COMMIT' >> /etc/iptables/rules.v4
 iptables-restore < /etc/iptables/rules.v4
 echo '<<<Success>>>' 
-##############################################
-echo '===Adding Cron job for auto maitenance==='
-wget https://raw.githubusercontent.com/moislamm/linux-harden/main/upgrade.sh && chmod 700 upgrade.sh
-echo "$(crontab -l ; echo '30 20 * * * /root/upgrade.sh') | crontab -"
 echo '========================================================================================'
 echo '===Rebooting system for settings to take affect..'                                   ==='
 echo '========================================================================================
