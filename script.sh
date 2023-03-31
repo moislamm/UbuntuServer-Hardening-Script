@@ -130,4 +130,6 @@ sudo ss -ltnp
 echo '==========================================IPTables Output======================================================='
 iptables -L
 echo '***************************************System hardening completed!**********************************************'
+sleep 15
+echo 'Waiting 15sec before rebooting....'
 reboot
