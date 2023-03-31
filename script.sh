@@ -1,15 +1,16 @@
 #!/bin/bash
 
-##########################################
-echo '==========================================Performing Update and Upgrade====================================================================================='
+##############################################################################################
+echo '===Performing Update and Upgrade==='
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
 echo '<<<Success>>>' 
-echo '==========================================Installing ser2Net, nano, iptables-persistent, telnet, rsyslog===================================================='
+##############################################################################################
+echo '===Installing Applications========='
 sudo DEBIAN_FRONTEND=noninteractive apt-get install ser2net nano iptables-persistent telnet rsyslog -y
 echo '<<<Success>>>' 
-##########################################
-echo '==========================================Secureing SSH rules==============================================================================================='
+##############################################################################################
+echo '===Secureing SSH rules============='
 rm /etc/hosts.allow
 sudo touch /etc/hosts.allow
 sudo chmod 600 /etc/hosts.allow
@@ -19,8 +20,8 @@ sudo chmod 600 /etc/hosts.deny
 echo "sshd: 192.168.0.0/16" >> /etc/hosts.allow
 echo "shd: ALL" >> /etc/hosts.deny
 echo '<<<Success>>>' 
-##########################################
-echo '==========================================Hardening SSH Application========================================================================================='
+##############################################################################################
+echo '===Hardening SSH Application======='
 rm /etc/ssh/sshd_config
 touch /etc/ssh/sshd_config
 chmod 600 /etc/ssh/sshd_config
@@ -45,8 +46,8 @@ echo "AllowUsers rwsadmin" >> /etc/ssh/sshd_config
 echo "ChallengeResponseAuthentication no" >> /etc/ssh/sshd_config
 echo "DebianBanner no" >> /etc/ssh/sshd_config
 echo '<<<Success>>>' 
-##########################################
-echo '==========================================Hardening Kernel================================================================================================'
+##############################################################################################
+echo '===Hardening Kernel================'
 rm /etc/sysctl.conf
 touch /etc/sysctl.conf
 chmod 600 /etc/sysctl.conf
@@ -87,15 +88,15 @@ echo "net.ipv4.conf.all.rp_filter = 1 " >> /etc/sysctl.conf
 echo "# Controls source route verification " >> /etc/sysctl.conf
 echo "net.ipv4.conf.default.rp_filter = 1 " >> /etc/sysctl.conf
 echo '<<<Success>>>' 
-##############################################
-echo '==========================================Disabling IPv6======================================================================================================='
+##############################################################################################
+echo '===Disabling IPv6=================='
 sed -i '/GRUB_DEFAULT=0/,/ Uncomment to enable BadRAM/ s/GRUB_CMDLINE_LINUX_DEFAULT=""/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash ipv6.disable=1"/g' /etc/default/grub
 sed -i '/GRUB_DEFAULT=0/,/ Uncomment to enable BadRAM/ s/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash ipv6.disable=1"/g' /etc/default/grub
 sed -i '/GRUB_DEFAULT=0/,/ Uncomment to enable BadRAM/ s/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="ipv6.disable=1"/g' /etc/default/grub
 sudo update-grub
 echo '<<<Success>>>' 
-##############################################
-echo '==========================================Hardening IPTables==================================================================================================='
+##############################################################################################
+echo '===Hardening IPTables=============='
 rm /etc/iptables/rules.v4
 sudo iptables-save > /etc/iptables/rules.v4
 echo '*filter' >> /etc/iptables/rules.v4
@@ -114,6 +115,11 @@ echo 'COMMIT' >> /etc/iptables/rules.v4
 iptables-restore < /etc/iptables/rules.v4
 echo '<<<Success>>>' 
 ##############################################
-echo 'Rebooting system for settings to take affect..'
+echo '===Adding Cron job for auto maitenance==='
+wget https://raw.githubusercontent.com/moislamm/linux-harden/main/upgrade.sh && chmod 700 upgrade.sh
+echo "$(crontab -l ; echo '30 20 * * * /root/upgrade.sh') | crontab -"
+echo '========================================================================================'
+echo '===Rebooting system for settings to take affect..'                                   ==='
+echo '========================================================================================
 sleep 15
 reboot
