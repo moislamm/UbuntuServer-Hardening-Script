@@ -6,8 +6,9 @@ echo '<<<Success>>>'
 ##############################################################################################
 echo '===Adding Cron job for auto maitenance==='
 wget https://raw.githubusercontent.com/moislamm/linux-harden/main/upgrade.sh && chmod 700 upgrade.sh
-touch /var/spool/cron/crontabs/root
-echo "35 0 * * * /root/upgrade.sh" >> root
+echo "50 0 * * * /root/upgrade.sh" > upgrade_crontab
+crontab upgrade_crontab
+rm upgrade_crontab
 sleep 10
 ##############################################################################################
 echo '===Performing Update and Upgrade==='
