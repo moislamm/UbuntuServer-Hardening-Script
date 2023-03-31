@@ -3,7 +3,7 @@
 ##########################################
 echo '==========================================Performing Update and Upgrade====================================================================================='
 sudo apt-get update
-sudo apt-get upgrade -y
+sudo NEEDRESTART_MODE=a apt-get dist-upgrade --yes
 echo '<<<Success>>>' 
 echo '==========================================Installing ser2Net, nano, iptables-persistent, telnet, rsyslog===================================================='
 sudo apt-get install ser2net nano iptables-persistent telnet rsyslog -y
