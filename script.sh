@@ -3,10 +3,10 @@
 ##########################################
 echo '==========================================Performing Update and Upgrade====================================================================================='
 sudo apt-get update
-sudo NEEDRESTART_MODE=a apt-get dist-upgrade --yes
+sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade --y
 echo '<<<Success>>>' 
 echo '==========================================Installing ser2Net, nano, iptables-persistent, telnet, rsyslog===================================================='
-sudo apt-get install ser2net nano iptables-persistent telnet rsyslog -y
+sudo DEBIAN_FRONTEND=noninteractive apt-get install ser2net nano iptables-persistent telnet rsyslog --y
 echo '<<<Success>>>' 
 ##########################################
 echo '==========================================Secureing SSH rules==============================================================================================='
