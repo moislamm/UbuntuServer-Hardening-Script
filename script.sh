@@ -1,10 +1,5 @@
 #!/bin/bash
 ##############################################################################################
-echo '===Performing Update and Upgrade==='
-sudo apt-get update
-sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
-echo '<<<Success>>>' 
-##############################################################################################
 echo '===Installing Applications========='
 sudo DEBIAN_FRONTEND=noninteractive apt-get install ser2net nano iptables-persistent telnet rsyslog cron -y
 echo '<<<Success>>>' 
@@ -12,6 +7,12 @@ echo '<<<Success>>>'
 echo '===Adding Cron job for auto maitenance==='
 wget https://raw.githubusercontent.com/moislamm/linux-harden/main/upgrade.sh && chmod 700 upgrade.sh
 echo "$(crontab -l ; echo '30 20 * * * /root/upgrade.sh') | crontab -"
+sleep 10
+##############################################################################################
+echo '===Performing Update and Upgrade==='
+sudo apt-get update
+sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
+echo '<<<Success>>>' 
 ##############################################################################################
 echo '===Secureing SSH rules============='
 rm /etc/hosts.allow
