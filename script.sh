@@ -114,6 +114,6 @@ echo 'COMMIT' >> /etc/iptables/rules.v4
 iptables-restore < /etc/iptables/rules.v4
 echo '<<<Success>>>' 
 ##############################################
-echo 'Rebooting system...in 5sec...
-sleep 5
+echo 'Rebooting system for settings to take affect..'
+sleep 15
 reboot
