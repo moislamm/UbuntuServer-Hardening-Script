@@ -72,6 +72,7 @@ echo "Protocol 2" >> /etc/ssh/sshd_config
 echo "AllowUsers rwsadmin" >> /etc/ssh/sshd_config
 echo "ChallengeResponseAuthentication no" >> /etc/ssh/sshd_config
 echo "DebianBanner no" >> /etc/ssh/sshd_config
+echo "Banner /root/banner.txt" >> /etc/ssh/sshd_config
 echo '###DONE!###'
 ##############################################################################################
 echo '===Hardening Kernel================'
