@@ -3,7 +3,7 @@
 echo '===Installing Applications========='
 sleep 5
 sudo DEBIAN_FRONTEND=noninteractive apt-get install ser2net nano iptables-persistent telnet rsyslog cron iputils-ping -y
-echo '<<<Success>>>' 
+echo '###DONE!###'
 ##############################################################################################
 echo '===Adding Cron job for auto maitenance==='
 sleep 5
@@ -21,7 +21,7 @@ echo '===Performing Update and Upgrade==='
 sleep 5
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
-echo '<<<Success>>>' 
+echo '###DONE!###'
 ##############################################################################################
 echo '===Secureing SSH rules============='
 sleep 5
@@ -33,7 +33,7 @@ sudo touch /etc/hosts.deny
 sudo chmod 600 /etc/hosts.deny
 echo "sshd: 192.168.0.0/16" >> /etc/hosts.allow
 echo "shd: ALL" >> /etc/hosts.deny
-echo '<<<Success>>>' 
+echo '###DONE!###'
 ##############################################################################################
 echo '===Hardening SSH Application======='
 sleep 5
@@ -60,7 +60,7 @@ echo "Protocol 2" >> /etc/ssh/sshd_config
 echo "AllowUsers rwsadmin" >> /etc/ssh/sshd_config
 echo "ChallengeResponseAuthentication no" >> /etc/ssh/sshd_config
 echo "DebianBanner no" >> /etc/ssh/sshd_config
-echo '<<<Success>>>' 
+echo '###DONE!###'
 ##############################################################################################
 echo '===Hardening Kernel================'
 sleep 5
@@ -103,7 +103,7 @@ echo "# Enable source validation by reversed path, as specified in RFC1812 " >> 
 echo "net.ipv4.conf.all.rp_filter = 1 " >> /etc/sysctl.conf
 echo "# Controls source route verification " >> /etc/sysctl.conf
 echo "net.ipv4.conf.default.rp_filter = 1 " >> /etc/sysctl.conf
-echo '<<<Success>>>' 
+echo '###DONE!###'
 ##############################################################################################
 echo '===Disabling IPv6=================='
 sleep 5
@@ -111,7 +111,7 @@ sed -i '/GRUB_DEFAULT=0/,/ Uncomment to enable BadRAM/ s/GRUB_CMDLINE_LINUX_DEFA
 sed -i '/GRUB_DEFAULT=0/,/ Uncomment to enable BadRAM/ s/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash ipv6.disable=1"/g' /etc/default/grub
 sed -i '/GRUB_DEFAULT=0/,/ Uncomment to enable BadRAM/ s/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="ipv6.disable=1"/g' /etc/default/grub
 sudo update-grub
-echo '<<<Success>>>' 
+echo '###DONE!###'
 ##############################################################################################
 echo '===Hardening IPTables=============='
 sleep 5
@@ -131,7 +131,7 @@ echo '#-A OUTPUT -j ACCEPT' >> /etc/iptables/rules.v4
 echo '-A INPUT -j DROP' >> /etc/iptables/rules.v4
 echo 'COMMIT' >> /etc/iptables/rules.v4
 iptables-restore < /etc/iptables/rules.v4
-echo '<<<Success>>>' 
+echo '###DONE!###'
 echo '======================================================================='
 echo '===Cleaning Files and Rebooting system for settings to take affect..==='
 echo '======================================================================='
