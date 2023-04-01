@@ -119,7 +119,7 @@ rm /etc/iptables/rules.v4
 sudo iptables-save > /etc/iptables/rules.v4
 echo '*filter' >> /etc/iptables/rules.v4
 echo ':INPUT DROP [130:14631]' >> /etc/iptables/rules.v4
-echo ':FORWARD ACCEPT [0:0]' >> /etc/iptables/rules.v4
+echo ':FORWARD DROP [0:0]' >> /etc/iptables/rules.v4
 echo ':OUTPUT ACCEPT [0:0]' >> /etc/iptables/rules.v4
 echo '#Allow Loopback  << the following two lines allow local loopback connection required for the reverse telnet to the device via Ser2Net.' >> /etc/iptables/rules.v4
 echo '-A INPUT -i lo -j ACCEPT' >> /etc/iptables/rules.v4
