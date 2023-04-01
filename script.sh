@@ -120,6 +120,7 @@ echo '-A INPUT -j DROP' >> /etc/iptables/rules.v4
 echo 'COMMIT' >> /etc/iptables/rules.v4
 iptables-restore < /etc/iptables/rules.v4
 echo '<<<Success>>>' 
+echo '==========================================VERIFICATION OUTPUTS=================================================='
 echo '==========================================IPTables Output======================================================='
 iptables --list
 echo '==========================================SSH Rules Output======================================================'
