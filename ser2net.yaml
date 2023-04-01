@@ -1,0 +1,60 @@
+%YAML 1.1
+---
+# This is a ser2net configuration file, tailored to be rather
+# simple.
+#
+# Find detailed documentation in ser2net.yaml(5)
+# A fully featured configuration file is in
+# /usr/share/doc/ser2net/examples/ser2net.yaml.gz
+# 
+# If you find your configuration more useful than this very simple
+# one, please submit it as a bugreport
+
+define: &Firewall \r\nser2net port \p device \d [\B] (Network Console Server)\r\n\r\n
+define: &CoreSwitch \r\nser2net port \p device \d [\B] (Network Console Server)\r\n\r\n
+define: &AccessSwitch1 \r\nser2net port \p device \d [\B] (Network Console Server)\r\n\r\n
+define: &AccessSwitch2 \r\nser2net port \p device \d [\B] (Network Console Server)\r\n\r\n
+
+connection: &Firewall
+    accepter: telnet(rfc2217),tcp,2000
+    enable: on
+    options:
+      banner: *Firewall
+      kickolduser: true
+      telnet-brk-on-sync: true
+    connector: serialdev,
+              /dev/ttyUSB0,
+              9600n81,local
+
+connection: &CoreSwitch
+    accepter: telnet(rfc2217),tcp,2001
+    enable: on
+    options:
+      banner: *CoreSwitch
+      kickolduser: true
+      telnet-brk-on-sync: true
+    connector: serialdev,
+              /dev/ttyUSB1,
+              9600n81,local
+
+connection: &AccessSwitch1
+    accepter: telnet(rfc2217),tcp,2002
+    enable: on
+    options:
+      banner: *AccessSwitch1
+      kickolduser: true
+      telnet-brk-on-sync: true
+    connector: serialdev,
+              /dev/ttyUSB2,
+              19200n81,local
+
+connection: &AccessSwitch2
+    accepter: telnet(rfc2217),tcp,2003
+    enable: on
+    options:
+      banner: *AccessSwitch2
+      kickolduser: true
+      telnet-brk-on-sync: true
+    connector: serialdev,
+              /dev/ttyUSB3,
+              19200n81,local
