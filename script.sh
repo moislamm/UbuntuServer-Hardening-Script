@@ -1,26 +1,30 @@
 #!/bin/bash
 ##############################################################################################
 echo '===Installing Applications========='
+sleep 5
 sudo DEBIAN_FRONTEND=noninteractive apt-get install ser2net nano iptables-persistent telnet rsyslog cron iputils-ping -y
 echo '<<<Success>>>' 
 ##############################################################################################
 echo '===Adding Cron job for auto maitenance==='
+sleep 5
 wget https://raw.githubusercontent.com/moislamm/linux-harden/main/upgrade.sh && chmod 700 upgrade.sh
 echo "0 6 * * * /root/upgrade.sh >> /root/upgrade.log 2>&1" > upgrade_crontab
 crontab upgrade_crontab
 rm upgrade_crontab
-sleep 10
 ##############################################################################################
 echo '===Downloading Ser2NetFile========='
+sleep 5
 wget https://raw.githubusercontent.com/moislamm/linux-harden/main/ser2net.yaml && chmod 644 ser2net.yaml
 mv ser2net.yaml /etc/ser2net.yaml
 ##############################################################################################
 echo '===Performing Update and Upgrade==='
+sleep 5
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
 echo '<<<Success>>>' 
 ##############################################################################################
 echo '===Secureing SSH rules============='
+sleep 5
 rm /etc/hosts.allow
 sudo touch /etc/hosts.allow
 sudo chmod 600 /etc/hosts.allow
@@ -32,6 +36,7 @@ echo "shd: ALL" >> /etc/hosts.deny
 echo '<<<Success>>>' 
 ##############################################################################################
 echo '===Hardening SSH Application======='
+sleep 5
 rm /etc/ssh/sshd_config
 touch /etc/ssh/sshd_config
 chmod 600 /etc/ssh/sshd_config
@@ -58,6 +63,7 @@ echo "DebianBanner no" >> /etc/ssh/sshd_config
 echo '<<<Success>>>' 
 ##############################################################################################
 echo '===Hardening Kernel================'
+sleep 5
 rm /etc/sysctl.conf
 touch /etc/sysctl.conf
 chmod 600 /etc/sysctl.conf
@@ -100,6 +106,7 @@ echo "net.ipv4.conf.default.rp_filter = 1 " >> /etc/sysctl.conf
 echo '<<<Success>>>' 
 ##############################################################################################
 echo '===Disabling IPv6=================='
+sleep 5
 sed -i '/GRUB_DEFAULT=0/,/ Uncomment to enable BadRAM/ s/GRUB_CMDLINE_LINUX_DEFAULT=""/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash ipv6.disable=1"/g' /etc/default/grub
 sed -i '/GRUB_DEFAULT=0/,/ Uncomment to enable BadRAM/ s/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash ipv6.disable=1"/g' /etc/default/grub
 sed -i '/GRUB_DEFAULT=0/,/ Uncomment to enable BadRAM/ s/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="ipv6.disable=1"/g' /etc/default/grub
@@ -107,6 +114,7 @@ sudo update-grub
 echo '<<<Success>>>' 
 ##############################################################################################
 echo '===Hardening IPTables=============='
+sleep 5
 rm /etc/iptables/rules.v4
 sudo iptables-save > /etc/iptables/rules.v4
 echo '*filter' >> /etc/iptables/rules.v4
@@ -124,9 +132,11 @@ echo '-A INPUT -j DROP' >> /etc/iptables/rules.v4
 echo 'COMMIT' >> /etc/iptables/rules.v4
 iptables-restore < /etc/iptables/rules.v4
 echo '<<<Success>>>' 
+echo '===Cleaning up files=============='
+sleep 5
 rm script.sh
-echo '========================================================================================'
-echo '===Rebooting system for settings to take affect..                                   ===='
-echo '========================================================================================'
-sleep 15
+echo '===================================================='
+echo '===Rebooting system for settings to take affect..==='
+echo '===================================================='
+sleep 10
 reboot
