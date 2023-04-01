@@ -25,6 +25,16 @@ sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
 echo '###DONE!###'
 ##############################################################################################
+echo '===Creating SSH Banner============='
+sudo touch /root/banner.txt
+sudo chmod 600 /root/banner.txt
+echo '#########################################' >> /root/banner.txt
+echo '#          RESTRICTED SYSTEM            #' >> /root/banner.txt
+echo '#                                       #' >> /root/banner.txt
+echo '# ALL SYSTEM ACTIVITY IS MONITORED 24X7 #' >> /root/banner.txt
+echo '#########################################' >> /root/banner.txt
+echo '###DONE!###'
+##############################################################################################
 echo '===Secureing SSH rules============='
 sleep 5
 rm /etc/hosts.allow
