@@ -25,6 +25,16 @@ sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
 echo '###DONE!###'
 ##############################################################################################
+echo '===Creating SSH Banner============='
+sudo touch /root/banner.txt
+sudo chmod 600 /root/banner.txt
+echo '#########################################' >> /root/banner.txt
+echo '#          RESTRICTED SYSTEM            #' >> /root/banner.txt
+echo '#                                       #' >> /root/banner.txt
+echo '# ALL SYSTEM ACTIVITY IS MONITORED 24X7 #' >> /root/banner.txt
+echo '#########################################' >> /root/banner.txt
+echo '###DONE!###'
+##############################################################################################
 echo '===Secureing SSH rules============='
 sleep 5
 rm /etc/hosts.allow
@@ -62,6 +72,7 @@ echo "Protocol 2" >> /etc/ssh/sshd_config
 echo "AllowUsers rwsadmin" >> /etc/ssh/sshd_config
 echo "ChallengeResponseAuthentication no" >> /etc/ssh/sshd_config
 echo "DebianBanner no" >> /etc/ssh/sshd_config
+echo "Banner /root/banner.txt" >> /etc/ssh/sshd_config
 echo '###DONE!###'
 ##############################################################################################
 echo '===Hardening Kernel================'
