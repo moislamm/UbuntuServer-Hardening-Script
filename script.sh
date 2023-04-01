@@ -11,11 +11,13 @@ wget https://raw.githubusercontent.com/moislamm/linux-harden/main/upgrade.sh && 
 echo "0 6 * * * /root/upgrade.sh >> /root/upgrade.log 2>&1" > upgrade_crontab
 crontab upgrade_crontab
 rm upgrade_crontab
+echo '###DONE!###'
 ##############################################################################################
 echo '===Downloading Ser2NetFile========='
 sleep 5
 wget https://raw.githubusercontent.com/moislamm/linux-harden/main/ser2net.yaml && chmod 644 ser2net.yaml
 mv ser2net.yaml /etc/ser2net.yaml
+echo '###DONE!###'
 ##############################################################################################
 echo '===Performing Update and Upgrade==='
 sleep 5
