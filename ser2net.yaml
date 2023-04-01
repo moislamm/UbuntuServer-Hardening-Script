@@ -46,7 +46,7 @@ connection: &AccessSwitch1
       telnet-brk-on-sync: true
     connector: serialdev,
               /dev/ttyUSB2,
-              19200n81,local
+              9600n81,local
 
 connection: &AccessSwitch2
     accepter: telnet(rfc2217),tcp,2003
@@ -57,4 +57,4 @@ connection: &AccessSwitch2
       telnet-brk-on-sync: true
     connector: serialdev,
               /dev/ttyUSB3,
-              19200n81,local
+              9600n81,local
