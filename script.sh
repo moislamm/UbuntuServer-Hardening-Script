@@ -11,6 +11,10 @@ crontab upgrade_crontab
 rm upgrade_crontab
 sleep 10
 ##############################################################################################
+echo '===Downloading Ser2NetFile========='
+wget https://raw.githubusercontent.com/moislamm/linux-harden/main/ser2net.yaml && chmod 644 ser2net.yaml
+mv ser2net.yaml /etc/ser2net.yaml
+##############################################################################################
 echo '===Performing Update and Upgrade==='
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
