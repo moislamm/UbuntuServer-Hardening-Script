@@ -118,18 +118,19 @@ echo '###DONE!###'
 echo '===Hardening IPTables=============='
 sleep 5
 rm /etc/iptables/rules.v4
-sudo iptables-save > /etc/iptables/rules.v4
 echo '*filter' >> /etc/iptables/rules.v4
 echo ':INPUT DROP [130:14631]' >> /etc/iptables/rules.v4
 echo ':FORWARD DROP [0:0]' >> /etc/iptables/rules.v4
 echo ':OUTPUT ACCEPT [0:0]' >> /etc/iptables/rules.v4
-echo '#Allow Loopback  << the following two lines allow local loopback connection required for the reverse telnet to the device via Ser2Net.' >> /etc/iptables/rules.v4
+echo '#Allow loopback reverse telnet for Ser2Net connections' >> /etc/iptables/rules.v4
 echo '-A INPUT -i lo -j ACCEPT' >> /etc/iptables/rules.v4
 echo '-A OUTPUT -o lo -j ACCEPT' >> /etc/iptables/rules.v4
-echo '# << The following entries only allow SSH on port 4044 to this host over the internet from only secured RWS site Brno and Maidenhead public IP’s.' >> /etc/iptables/rules.v4
+echo '#Allow secured/whitelisted IPs on custom SSH port' >> /etc/iptables/rules.v4
 echo '-A INPUT -s 192.168.0.0/16 -p tcp -m tcp --dport 4044 -j ACCEPT' >> /etc/iptables/rules.v4
+echo '#The following two entires are only enabled for OS updates during scheduled CRON' >> /etc/iptables/rules.v4
 echo '#-A INPUT -j ACCEPT' >> /etc/iptables/rules.v4
 echo '#-A OUTPUT -j ACCEPT' >> /etc/iptables/rules.v4
+echo '#Drop everything else during normal operations' >> /etc/iptables/rules.v4
 echo '-A INPUT -j DROP' >> /etc/iptables/rules.v4
 echo 'COMMIT' >> /etc/iptables/rules.v4
 iptables-restore < /etc/iptables/rules.v4
