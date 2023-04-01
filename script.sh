@@ -132,11 +132,9 @@ echo '-A INPUT -j DROP' >> /etc/iptables/rules.v4
 echo 'COMMIT' >> /etc/iptables/rules.v4
 iptables-restore < /etc/iptables/rules.v4
 echo '<<<Success>>>' 
-echo '===Cleaning up files=============='
-sleep 5
-rm script.sh
-echo '===================================================='
-echo '===Rebooting system for settings to take affect..==='
-echo '===================================================='
+echo '======================================================================='
+echo '===Cleaning Files and Rebooting system for settings to take affect..==='
+echo '======================================================================='
 sleep 10
 reboot
+rm script.sh
