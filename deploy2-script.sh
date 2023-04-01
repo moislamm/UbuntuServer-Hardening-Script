@@ -7,7 +7,7 @@ echo '###DONE!###'
 ##############################################################################################
 echo '===Adding Cron job for auto maitenance==='
 sleep 5
-wget https://raw.githubusercontent.com/moislamm/linux-harden/main/upgrade.sh && chmod 700 upgrade.sh
+wget https://raw.githubusercontent.com/moislamm/UbuntuServer-Hardening-Script/main/upgrade.sh && chmod 700 upgrade.sh
 echo "0 6 * * * /root/upgrade.sh >> /root/upgrade.log 2>&1" > upgrade_crontab
 crontab upgrade_crontab
 rm upgrade_crontab
@@ -15,7 +15,7 @@ echo '###DONE!###'
 ##############################################################################################
 echo '===Downloading Ser2NetFile========='
 sleep 5
-wget https://raw.githubusercontent.com/moislamm/linux-harden/main/ser2net.yaml && chmod 644 ser2net.yaml
+wget https://raw.githubusercontent.com/moislamm/UbuntuServer-Hardening-Script/main/ser2net.yaml && chmod 644 ser2net.yaml
 mv ser2net.yaml /etc/ser2net.yaml
 echo '###DONE!###'
 ##############################################################################################
