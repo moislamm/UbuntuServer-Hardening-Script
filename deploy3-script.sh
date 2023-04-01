@@ -53,7 +53,7 @@ rm /etc/ssh/sshd_config
 touch /etc/ssh/sshd_config
 chmod 600 /etc/ssh/sshd_config
 chown root:root /etc/ssh/sshd_config
-echo "Port 4044" >> /etc/ssh/sshd_config
+echo "Port 22" >> /etc/ssh/sshd_config
 echo "SyslogFacility AUTH" >> /etc/ssh/sshd_config
 echo "LoginGraceTime 20" >> /etc/ssh/sshd_config
 echo "PermitRootLogin no" >> /etc/ssh/sshd_config
@@ -126,26 +126,6 @@ sed -i '/GRUB_DEFAULT=0/,/ Uncomment to enable BadRAM/ s/GRUB_CMDLINE_LINUX=""/G
 sudo update-grub
 echo '###DONE!###'
 ##############################################################################################
-echo '===Hardening IPTables=============='
-sleep 5
-rm /etc/iptables/rules.v4
-echo '*filter' >> /etc/iptables/rules.v4
-echo ':INPUT DROP [130:14631]' >> /etc/iptables/rules.v4
-echo ':FORWARD DROP [0:0]' >> /etc/iptables/rules.v4
-echo ':OUTPUT ACCEPT [0:0]' >> /etc/iptables/rules.v4
-echo '#Allow loopback reverse telnet for Ser2Net connections' >> /etc/iptables/rules.v4
-echo '-A INPUT -i lo -j ACCEPT' >> /etc/iptables/rules.v4
-echo '-A OUTPUT -o lo -j ACCEPT' >> /etc/iptables/rules.v4
-echo '#Allow secured/whitelisted IPs on custom SSH port' >> /etc/iptables/rules.v4
-echo '-A INPUT -s 192.168.0.0/16 -p tcp -m tcp --dport 4044 -j ACCEPT' >> /etc/iptables/rules.v4
-echo '#The following two entires are only enabled for OS updates during scheduled CRON' >> /etc/iptables/rules.v4
-echo '#-A INPUT -j ACCEPT' >> /etc/iptables/rules.v4
-echo '#-A OUTPUT -j ACCEPT' >> /etc/iptables/rules.v4
-echo '#Drop everything else during normal operations' >> /etc/iptables/rules.v4
-echo '-A INPUT -j DROP' >> /etc/iptables/rules.v4
-echo 'COMMIT' >> /etc/iptables/rules.v4
-iptables-restore < /etc/iptables/rules.v4
-echo '###DONE!###'
 echo '======================================================================='
 echo '===Cleaning Files and Rebooting system for settings to take affect..==='
 echo '======================================================================='
