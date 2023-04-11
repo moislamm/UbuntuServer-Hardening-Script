@@ -8,7 +8,7 @@ echo '###DONE!###'
 echo '===Adding Cron job for auto maitenance==='
 sleep 5
 wget https://raw.githubusercontent.com/moislamm/UbuntuServer-Hardening-Script/main/deploy2-upgrade.sh && chmod 700 deploy2-upgrade.sh
-echo "0 6 * * * /root/upgrade.sh >> /root/deploy2-upgrade.log 2>&1" > upgrade_crontab
+echo "0 6 * * * /root/deploy2-upgrade.sh >> /root/deploy2-upgrade.log 2>&1" > upgrade_crontab
 crontab upgrade_crontab
 rm upgrade_crontab
 echo '###DONE!###'
