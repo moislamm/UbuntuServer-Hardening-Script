@@ -11,7 +11,9 @@ echo '#Allow loopback reverse telnet for Ser2Net connections' >> /etc/iptables/r
 echo '-A INPUT -i lo -j ACCEPT' >> /etc/iptables/rules.v4
 echo '-A OUTPUT -o lo -j ACCEPT' >> /etc/iptables/rules.v4
 echo '#Allow secured/whitelisted IPs on custom SSH port' >> /etc/iptables/rules.v4
-echo '-A INPUT -s 192.168.0.0/16 -p tcp -m tcp --dport 4044 -j ACCEPT' >> /etc/iptables/rules.v4
+echo '-A INPUT -s 10.6.88.120/32 -p tcp -m tcp --dport 4044 -j ACCEPT' >> /etc/iptables/rules.v4
+echo '-A INPUT -s 10.32.88.120/32 -p tcp -m tcp --dport 4044 -j ACCEPT' >> /etc/iptables/rules.v4
+echo '-A INPUT -s 10.3.88.120/32 -p tcp -m tcp --dport 4044 -j ACCEPT' >> /etc/iptables/rules.v4
 echo '#The following two entires are only enabled for OS updates during scheduled CRON' >> /etc/iptables/rules.v4
 echo '-A INPUT -j ACCEPT' >> /etc/iptables/rules.v4
 echo '-A OUTPUT -j ACCEPT' >> /etc/iptables/rules.v4
@@ -36,7 +38,9 @@ echo '#Allow loopback reverse telnet for Ser2Net connections' >> /etc/iptables/r
 echo '-A INPUT -i lo -j ACCEPT' >> /etc/iptables/rules.v4
 echo '-A OUTPUT -o lo -j ACCEPT' >> /etc/iptables/rules.v4
 echo '#Allow secured/whitelisted IPs on custom SSH port' >> /etc/iptables/rules.v4
-echo '-A INPUT -s 192.168.0.0/16 -p tcp -m tcp --dport 4044 -j ACCEPT' >> /etc/iptables/rules.v4
+echo '-A INPUT -s 10.6.88.120/32 -p tcp -m tcp --dport 4044 -j ACCEPT' >> /etc/iptables/rules.v4
+echo '-A INPUT -s 10.32.88.120/32 -p tcp -m tcp --dport 4044 -j ACCEPT' >> /etc/iptables/rules.v4
+echo '-A INPUT -s 10.3.88.120/32 -p tcp -m tcp --dport 4044 -j ACCEPT' >> /etc/iptables/rules.v4
 echo '#The following two entires are only enabled for OS updates during scheduled CRON' >> /etc/iptables/rules.v4
 echo '#-A INPUT -j ACCEPT' >> /etc/iptables/rules.v4
 echo '#-A OUTPUT -j ACCEPT' >> /etc/iptables/rules.v4
