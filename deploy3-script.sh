@@ -2,7 +2,7 @@
 ##############################################################################################
 echo '===Installing Applications========='
 sleep 5
-sudo DEBIAN_FRONTEND=noninteractive apt-get install ser2net nano iptables-persistent telnet rsyslog cron iputils-ping -y
+sudo DEBIAN_FRONTEND=noninteractive apt-get install ser2net nano iptables-persistent telnet rsyslog cron iputils-ping moreutils -y
 echo '###DONE!###'
 ##############################################################################################
 echo '===Adding Cron job for auto maitenance==='
