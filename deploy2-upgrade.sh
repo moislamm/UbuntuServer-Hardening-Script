@@ -24,8 +24,8 @@ iptables-restore < /etc/iptables/rules.v4
 echo '###DONE!###'
 ##############################################################
 echo '===Performing update and system upgrades==============='
-sudo apt-get update
-sudo apt-get upgrade -y
+sudo apt-get update |ts
+sudo apt-get upgrade -y |ts
 echo '###DONE!###'
 ##############################################################
 echo '===Re-instating Hardened IPtables======================'
