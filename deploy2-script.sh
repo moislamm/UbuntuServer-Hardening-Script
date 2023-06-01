@@ -126,6 +126,15 @@ sed -i '/GRUB_DEFAULT=0/,/ Uncomment to enable BadRAM/ s/GRUB_CMDLINE_LINUX=""/G
 sudo update-grub
 echo '###DONE!###'
 ##############################################################################################
+echo '===Disabling Power=================='
+sleep 5
+echo "HandleSuspendKey=ignore" >> /etc/systemd/logind.conf
+echo "HandleHibernateKey=ignore" >> /etc/systemd/logind.conf
+echo "HandleLidSwitch=ignore" >> /etc/systemd/logind.conf
+echo "HandleLidSwitchExternalPower=ignore" >> /etc/systemd/logind.conf
+echo "HandleLidSwitchDocked=ignore" >> /etc/systemd/logind.conf
+echo '###DONE!###'
+##############################################################################################
 echo '===Hardening IPTables=============='
 sleep 5
 rm /etc/iptables/rules.v4
